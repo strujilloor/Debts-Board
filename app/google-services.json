@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "991453730551",
+    "firebase_url": "https://depts-board.firebaseio.com",
+    "project_id": "depts-board",
+    "storage_bucket": "depts-board.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991453730551:android:b2c9729168835b97",
+        "android_client_info": {
+          "package_name": "com.stiven.deptsboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991453730551-l8a9tlp5umpns18sn16li1572tul6dp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stiven.deptsboard",
+            "certificate_hash": "b00eb40d32d4ee264be6b6a1205acb0caca70479"
+          }
+        },
+        {
+          "client_id": "991453730551-jub9jveie3caqr4j59buljam5icq25n0.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "991453730551-jub9jveie3caqr4j59buljam5icq25n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi3ONwNojdbeS4-Mw_L4aLdNQdUQ9Lfvo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991453730551-jub9jveie3caqr4j59buljam5icq25n0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
