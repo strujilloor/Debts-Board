@@ -100,7 +100,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Toast.makeText(LoginActivity.this, "Google Authentication Success", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
-                        finish();
+                        // Si destruyo la actividad no me funciona el Up Button :/
+//                        finish();
                     }else{
                         Toast.makeText(LoginActivity.this, "Google Authentication UnSeccess", Toast.LENGTH_SHORT).show();
                     }
