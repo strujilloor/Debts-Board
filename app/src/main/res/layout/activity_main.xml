@@ -4,25 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <include layout="@layout/actionbar_toolbar"/>
+    tools:context=".view.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <include layout="@layout/actionbar_toolbar" />
 
         <TextView
             android:id="@+id/tvUserData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btnSignOut"
-            android:layout_gravity="bottom"
-            android:text="Sign Out"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginBottom="105dp"
+            android:layout_marginTop="57dp">
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnSignOut"
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Out"
+                android:theme="@style/MyButton" />
+
+            <include layout="@layout/bottom_navigation" />
+
+        </LinearLayout>
+
+
     </FrameLayout>
+
 
 </android.support.constraint.ConstraintLayout>
