@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 public class BorrowFragment extends Fragment {
 
-    private static final String DEPT_NODE = "Debts";
+    private static final String DEBT_NODE = "Debts";
     FloatingActionButton fab;
 
     private RecyclerView recyclerView;
@@ -106,7 +106,7 @@ public class BorrowFragment extends Fragment {
 
 //    public void createDebt(String name, String amount){
 //        Debt debt = new Debt(databaseReference.push().getKey(), name, amount);
-//        databaseReference.child(DEPT_NODE)
+//        databaseReference.child(DEBT_NODE)
 //                .child(debt.getId())
 //                .setValue(debt);
 //    }
