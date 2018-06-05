@@ -1,10 +1,20 @@
 package com.stiven.deptsboard.model;
 
-public class Dept {
+public class Debt {
+    private String id;
     private String name;
     private String amount;
 
-    public Dept(String name, String amount) {
+    public Debt() {
+    }
+
+    public Debt(String name, String amount) {
+        this.name = name;
+        this.amount = amount;
+    }
+
+    public Debt(String id, String name, String amount) {
+        this.id = id;
         this.name = name;
         this.amount = amount;
     }
@@ -25,9 +35,17 @@ public class Dept {
         this.amount = amount;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "Dept{" +
+        return "Debt{" +
                 "name='" + name + '\'' +
                 ", amount='" + amount + '\'' +
                 '}';

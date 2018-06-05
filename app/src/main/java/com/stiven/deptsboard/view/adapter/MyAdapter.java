@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.stiven.deptsboard.R;
-import com.stiven.deptsboard.model.Dept;
+import com.stiven.deptsboard.model.Debt;
 
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private ArrayList<Dept> mDataset;
+    private ArrayList<Debt> mDataset;
     private int resource;
     private Activity activity;
 
-    public MyAdapter(ArrayList<Dept> myDataset, int resource, Activity activity) {
+    public MyAdapter(ArrayList<Debt> myDataset, int resource, Activity activity) {
         this.mDataset = myDataset;
         this.resource = resource; // the layout that contains the cardview in this example
         this.activity = activity;
@@ -48,9 +48,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Dept dept = mDataset.get(position);
-        holder.name_card.setText(dept.getName());
-        holder.amount_card.setText(dept.getAmount());
+        Debt debt = mDataset.get(position);
+        holder.name_card.setText(debt.getName());
+        holder.amount_card.setText(debt.getAmount());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -59,8 +59,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return mDataset.size();
     }
 
-    public void addToList(Dept dept){
-        mDataset.add(dept);
+    public void addToList(Debt debt){
+        mDataset.add(debt);
     }
 
 

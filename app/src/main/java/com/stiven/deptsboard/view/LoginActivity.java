@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        showToolbar("Depts Board Login", false);
+        showToolbar("Debts Board Login", false);
 
         initialize();
 

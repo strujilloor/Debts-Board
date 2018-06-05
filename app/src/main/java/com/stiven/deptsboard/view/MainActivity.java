@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showToolbar("Depts Board", true);
+        showToolbar("Debts Board", true);
 
         btnSignOut = (Button) findViewById(R.id.btnSignOut);
         nav = (BottomNavigationView) findViewById(R.id.navigation);
