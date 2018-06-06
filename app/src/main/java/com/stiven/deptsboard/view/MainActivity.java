@@ -45,7 +45,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MainActivity";
-    private static final String DEBT_NODE = "Debts";
+    private static final String DEBT_NODE = "users";
     private Button btnSignOut;
     private FloatingActionButton fab;
     private BottomNavigationView nav;
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private RecyclerView.LayoutManager mLayoutManager;
 
     private DatabaseReference databaseReference;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true); //Habilitar la persistencia de Firebase cuando este sin internet
         databaseReference = FirebaseDatabase.getInstance().getReference(); // estamos obteniendo: debts-board
         initialize();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -90,7 +92,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mAdapter = new MyAdapter(debts, R.layout.cardview_debt, this);
         recyclerView.setAdapter(mAdapter);
 
-        databaseReference.child(DEBT_NODE).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(DEBT_NODE)
+                .child(firebaseUser.getUid())
+                .child("debts")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 debts.clear();
@@ -173,6 +178,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void createDebt(String name, String amount){
         Debt debt = new Debt(databaseReference.push().getKey(), name, amount);
         databaseReference.child(DEBT_NODE)
+                .child(firebaseUser.getUid())
+                .child("debts")
                 .child(debt.getId())
                 .setValue(debt);
     }
@@ -183,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null) {
+                    if (firebaseUser != null) {
 //                    TextView tvUserData = (TextView) findViewById(R.id.tvUserData);
 //                    tvUserData.setText("UserName: " + firebaseUser.getDisplayName() + " Email: " + firebaseUser.getEmail());
                 } else {

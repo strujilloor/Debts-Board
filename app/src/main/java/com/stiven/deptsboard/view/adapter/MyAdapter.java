@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.stiven.deptsboard.R;
@@ -64,10 +66,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 String id = debt.getId();
                 mDataset.remove(position);
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-                databaseReference.child("Debts").child(id).removeValue();
+                databaseReference.child("users")
+                        .child(firebaseUser.getUid())
+                        .child("debts")
+                        .child(id)
+                        .removeValue() ;
 
-                Toast.makeText(activity, "Pressed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Debt Deleted", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
