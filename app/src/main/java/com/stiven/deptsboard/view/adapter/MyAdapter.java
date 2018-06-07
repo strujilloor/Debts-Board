@@ -1,6 +1,7 @@
 package com.stiven.deptsboard.view.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.stiven.deptsboard.R;
 import com.stiven.deptsboard.model.Debt;
+import com.stiven.deptsboard.view.DebtEditorActivity;
+import com.stiven.deptsboard.view.MainActivity;
 
 import java.util.ArrayList;
 
@@ -76,6 +79,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                 Toast.makeText(activity, "Debt Deleted", Toast.LENGTH_SHORT).show();
                 return true;
+            }
+        });
+
+        holder.cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(activity, DebtEditorActivity.class);
+                activity.startActivity(i);
             }
         });
     }
