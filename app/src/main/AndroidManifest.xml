@@ -18,11 +18,12 @@
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:parentActivityName="com.stiven.deptsboard.view.LoginActivity">
+            android:parentActivityName=".view.LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.LoginActivity"/>
+                android:value=".view.LoginActivity" />
         </activity>
+        <activity android:name=".view.DebtEditorActivity"></activity>
     </application>
 
 </manifest>
