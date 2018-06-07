@@ -4,19 +4,29 @@ public class Debt {
     private String id;
     private String name;
     private String amount;
+    private String details;
+    private boolean type;
 
     public Debt() {
     }
 
-    public Debt(String name, String amount) {
-        this.name = name;
-        this.amount = amount;
-    }
+//    public Debt(String name, String amount) {
+//        this.name = name;
+//        this.amount = amount;
+//    }
+//
+//    public Debt(String id, String name, String amount) {
+//        this.id = id;
+//        this.name = name;
+//        this.amount = amount;
+//    }
 
-    public Debt(String id, String name, String amount) {
+    public Debt(String id, String name, String amount, boolean type, String details) {
         this.id = id;
         this.name = name;
         this.amount = amount;
+        this.type = type; // true borrowed
+        this.details = details;
     }
 
     public String getName() {
@@ -41,6 +51,22 @@ public class Debt {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public boolean isType() {
+        return type;
+    }
+
+    public void setType(boolean type) {
+        this.type = type;
     }
 
     @Override

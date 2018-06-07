@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         nav = (BottomNavigationView) findViewById(R.id.navigation);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        //real-time
+        //real-time database
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true); //Habilitar la persistencia de Firebase cuando este sin internet
         databaseReference = FirebaseDatabase.getInstance().getReference(); // estamos obteniendo: debts-board
         initialize();
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         Debt debt = snapshot.getValue(Debt.class);
                         Log.w(TAG, "Debt Name: " +debt.getName());
+//                        Toast.makeText(MainActivity.this, debt.getName()+debt.isType(), Toast.LENGTH_SHORT).show();
                         debts.add(debt);
                     }
                 }
@@ -130,20 +132,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                                 View view = dialog.getCustomView();
                                 EditText name_dialog = (EditText) view.findViewById(R.id.name_dialog);
                                 EditText amount_dialog = (EditText) view.findViewById(R.id.amount_dialog);
+                                Switch type_dialog = (Switch) view.findViewById(R.id.type_dialog);
 
                                 String name = name_dialog.getText().toString();
                                 String amount = amount_dialog.getText().toString();
+                                boolean type = type_dialog.isChecked();
 
-                                createDebt(name, amount);
-
-                                mAdapter.addToList(new Debt(name, amount));
+                                createDebt(name, amount, type);
 
                                 Toast.makeText(MainActivity.this, "Added [" + name +","+amount+"]",
                                         Toast.LENGTH_SHORT).show();
                             }
                         })
                         .show();
-                showDebts();
             }
         });
 
@@ -175,8 +176,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
-    public void createDebt(String name, String amount){
-        Debt debt = new Debt(databaseReference.push().getKey(), name, amount);
+    public void createDebt(String name, String amount, boolean type){
+        Debt debt = new Debt(databaseReference.push().getKey(), name, amount, type, "");
         databaseReference.child(DEBT_NODE)
                 .child(firebaseUser.getUid())
                 .child("debts")

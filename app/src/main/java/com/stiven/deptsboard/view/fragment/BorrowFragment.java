@@ -60,8 +60,6 @@ public class BorrowFragment extends Fragment {
 
         // specify an MyAdapter
         ArrayList<Debt> debts = new ArrayList<>();
-        debts.add(new Debt("Jason","300.000"));
-        debts.add(new Debt("Carolina","200.000"));
         mAdapter = new MyAdapter(debts, R.layout.cardview_debt, this.getActivity());
         recyclerView.setAdapter(mAdapter);
 
@@ -90,7 +88,7 @@ public class BorrowFragment extends Fragment {
 
 //                                createDebt(name, amount);
 
-                                mAdapter.addToList(new Debt(name, amount));
+//                                mAdapter.addToList(new Debt(name, amount));
 
                                 Toast.makeText(getActivity(), "Added [" + name +","+amount+"]",
                                         Toast.LENGTH_SHORT).show();

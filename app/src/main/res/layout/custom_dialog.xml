@@ -20,7 +20,17 @@
             android:id="@+id/amount_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Amount" />
+
+        <Switch
+            android:id="@+id/type_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="Lent - Borrowed"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
