@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Depts Board</string>
+    <string name="app_name">Debts Board</string>
     <string name="menu_borrow">Borrow</string>
     <string name="menu_lend">Lend</string>
 

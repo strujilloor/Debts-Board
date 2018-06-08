@@ -40,7 +40,7 @@ public class DebtEditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_debt_editor);
 
-        showToolbar("Dept Editor", true);
+        showToolbar("Debt Editor", true);
 
         Intent intent = getIntent();
         id_debt = intent.getStringExtra(MyAdapter.EXTRA_ID);
@@ -108,7 +108,7 @@ public class DebtEditorActivity extends AppCompatActivity {
                         .child(id_debt)
                         .setValue(debt);
 
-                Toast.makeText(DebtEditorActivity.this, "Dept Updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DebtEditorActivity.this, "Debt Updated", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(DebtEditorActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
