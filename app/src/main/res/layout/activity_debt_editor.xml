@@ -80,6 +80,7 @@
                         android:layout_marginBottom="10dp">
 
                         <android.support.design.widget.TextInputEditText
+                            android:inputType="numberDecimal"
                             android:id="@+id/amount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
