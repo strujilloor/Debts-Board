@@ -44,7 +44,7 @@
                 android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Out"
+                android:text="@string/sign_out"
                 android:theme="@style/MyButton" />
 
             <include layout="@layout/bottom_navigation" />

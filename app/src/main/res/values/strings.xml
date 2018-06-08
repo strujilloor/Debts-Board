@@ -5,4 +5,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="debteditor_details">Here will go the details of the debt, such as the reason, date, fees, etc.</string>
+    <string name="amount_example">300.000</string>
+    <string name="name_example">Jason Trujillo</string>
+    <string name="stiven_name">Stiven Trujillo Ortiz</string>
+    <string name="debt_title">DEBT</string>
+    <string name="lender">Lender:</string>
+    <string name="debtor">Debtor:</string>
+    <string name="amount">Amount: $</string>
+    <string name="details">Details:</string>
+    <string name="update">Update</string>
+    <string name="name">Name:</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
