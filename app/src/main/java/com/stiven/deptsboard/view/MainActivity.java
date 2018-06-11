@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         }
                     }
                 }
-                DecimalFormat formatter = new DecimalFormat("#,###,###.#");
+                DecimalFormat formatter = new DecimalFormat("#,###,###.##");
 
                 // Total borrowed or lent:
                 BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);

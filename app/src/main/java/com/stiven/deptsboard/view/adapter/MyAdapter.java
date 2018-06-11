@@ -67,7 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        DecimalFormat formatter = new DecimalFormat("#,###,###.##");
         final int pos = position; // para utilizar dentro de los Listeners
         Debt debt = mDataset.get(position);
         holder.name_card.setText(debt.getName());
