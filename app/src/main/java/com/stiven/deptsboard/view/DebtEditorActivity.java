@@ -71,12 +71,12 @@ public class DebtEditorActivity extends AppCompatActivity {
                         if (debt.isType()){
                             lender.setText(debt.getName());
                             debtor.setText("Me");
-                            amount.setText(debt.getAmount());
+                            amount.setText(debt.getAmount().toString());
                             details.setText(debt.getDetails());
                         }else{
                             lender.setText("Me");
                             debtor.setText(debt.getName());
-                            amount.setText(debt.getAmount());
+                            amount.setText(debt.getAmount().toString());
                             details.setText(debt.getDetails());
                         }
 
@@ -94,11 +94,11 @@ public class DebtEditorActivity extends AppCompatActivity {
                 // Capturando nuevos valores
                 if (debt.isType()){
                     debt.setName(lender.getText().toString());
-                    debt.setAmount(amount.getText().toString());
+                    debt.setAmount(Double.parseDouble(amount.getText().toString()));
                     debt.setDetails(details.getText().toString());
                 }else{
                     debt.setName(debtor.getText().toString());
-                    debt.setAmount(amount.getText().toString());
+                    debt.setAmount(Double.parseDouble(amount.getText().toString()));
                     debt.setDetails(details.getText().toString());
                 }
 

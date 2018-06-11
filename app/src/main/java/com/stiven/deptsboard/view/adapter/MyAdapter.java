@@ -21,6 +21,7 @@ import com.stiven.deptsboard.model.Debt;
 import com.stiven.deptsboard.view.DebtEditorActivity;
 import com.stiven.deptsboard.view.MainActivity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -66,10 +67,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position; // para utilizar dentro de los Listeners
         Debt debt = mDataset.get(position);
         holder.name_card.setText(debt.getName());
-        holder.amount_card.setText(debt.getAmount());
+        holder.amount_card.setText( formatter.format(debt.getAmount()) );
         if (debt.isType()){
             holder.type_card.setText("Borrowed:");
             holder.image_card.setImageResource(R.drawable.ic_borrow);

@@ -42,6 +42,7 @@ import com.stiven.deptsboard.view.adapter.MyAdapter;
 import com.stiven.deptsboard.view.fragment.BorrowFragment;
 import com.stiven.deptsboard.view.fragment.LendFragment;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -63,12 +64,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
 
+    private double totalBorrowed;
+    private double totalLent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         showToolbar("Debts Board", true);
+
+        totalBorrowed = 0;
+        totalLent = 0;
 
         btnSignOut = (Button) findViewById(R.id.btnSignOut);
         nav = (BottomNavigationView) findViewById(R.id.navigation);
@@ -100,14 +107,28 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 debts.clear();
+                totalBorrowed = 0;
+                totalLent = 0;
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         Debt debt = snapshot.getValue(Debt.class);
                         Log.w(TAG, "Debt Name: " +debt.getName());
 //                        Toast.makeText(MainActivity.this, debt.getName()+debt.isType(), Toast.LENGTH_SHORT).show();
                         debts.add(debt);
+                        // Total borrowed or lent
+                        if (debt.isType()){
+                            totalBorrowed += debt.getAmount();
+                        }else{
+                            totalLent += debt.getAmount();
+                        }
                     }
                 }
+                DecimalFormat formatter = new DecimalFormat("#,###,###.#");
+
+                // Total borrowed or lent:
+                BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+                bottomNavigationView.getMenu().getItem(0).setTitle("Borrowed:$" + formatter.format(totalBorrowed));
+                bottomNavigationView.getMenu().getItem(1).setTitle("Lent:$" + formatter.format(totalLent));
                 showDebts();
             }
 
@@ -135,13 +156,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                                 Switch type_dialog = (Switch) view.findViewById(R.id.type_dialog);
 
                                 String name = name_dialog.getText().toString();
-                                String amount = amount_dialog.getText().toString();
+                                Double amount = Double.parseDouble(amount_dialog.getText().toString());
                                 boolean type = type_dialog.isChecked();
 
                                 createDebt(name, amount, type);
 
                                 Toast.makeText(MainActivity.this, "Added [" + name +","+amount+"]",
                                         Toast.LENGTH_SHORT).show();
+
                             }
                         })
                         .show();
@@ -176,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
-    public void createDebt(String name, String amount, boolean type){
+    public void createDebt(String name, Double amount, boolean type){
         Debt debt = new Debt(databaseReference.push().getKey(), name, amount, type, "");
         databaseReference.child(DEBT_NODE)
                 .child(firebaseUser.getUid())

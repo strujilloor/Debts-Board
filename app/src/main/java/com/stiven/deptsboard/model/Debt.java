@@ -3,7 +3,7 @@ package com.stiven.deptsboard.model;
 public class Debt {
     private String id;
     private String name;
-    private String amount;
+    private Double amount;
     private String details;
     private boolean type;
 
@@ -21,7 +21,7 @@ public class Debt {
 //        this.amount = amount;
 //    }
 
-    public Debt(String id, String name, String amount, boolean type, String details) {
+    public Debt(String id, String name, Double amount, boolean type, String details) {
         this.id = id;
         this.name = name;
         this.amount = amount;
@@ -37,11 +37,11 @@ public class Debt {
         this.name = name;
     }
 
-    public String getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

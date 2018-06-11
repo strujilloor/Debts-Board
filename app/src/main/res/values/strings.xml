@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Debts Board</string>
-    <string name="menu_borrow">Borrow</string>
-    <string name="menu_lend">Lend</string>
+    <string name="menu_borrow">Borrowed</string>
+    <string name="menu_lend">Lent</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
