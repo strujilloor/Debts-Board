@@ -17,4 +17,5 @@
     <string name="update">Update</string>
     <string name="name">Name:</string>
     <string name="sign_out">Sign Out</string>
+    <string name="paid">Paid:</string>
 </resources>

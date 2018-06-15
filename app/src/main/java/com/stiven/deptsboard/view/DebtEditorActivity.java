@@ -2,14 +2,18 @@ package com.stiven.deptsboard.view;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +25,8 @@ import com.stiven.deptsboard.R;
 import com.stiven.deptsboard.model.Debt;
 import com.stiven.deptsboard.view.adapter.MyAdapter;
 
+import java.text.DecimalFormat;
+
 public class DebtEditorActivity extends AppCompatActivity {
     String id_debt;
     TextInputEditText lender;
@@ -28,6 +34,7 @@ public class DebtEditorActivity extends AppCompatActivity {
     TextInputEditText amount;
     TextInputEditText details;
     Button btn_update;
+    FloatingActionButton fab_paid;
 
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
@@ -50,6 +57,7 @@ public class DebtEditorActivity extends AppCompatActivity {
         amount = (TextInputEditText) findViewById(R.id.amount);
         details = (TextInputEditText) findViewById(R.id.details);
         btn_update = (Button) findViewById(R.id.btn_update);
+        fab_paid = (FloatingActionButton) findViewById(R.id.fab_paid);
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference(); // estamos obteniendo: debts-board
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -60,7 +68,7 @@ public class DebtEditorActivity extends AppCompatActivity {
                 .child(firebaseUser.getUid())
                 .child("debts")
                 .child(id_debt)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -112,6 +120,51 @@ public class DebtEditorActivity extends AppCompatActivity {
                 Intent i = new Intent(DebtEditorActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
+            }
+        });
+
+        fab_paid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                boolean wrapInScrollView = false;
+                new MaterialDialog.Builder(DebtEditorActivity.this)
+                        .title("Paid Money")
+                        .customView(R.layout.custom_dialog_paid, wrapInScrollView)
+                        .positiveText("Paid")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+                                View view = dialog.getCustomView();
+                                EditText paid_dialog = (EditText) view.findViewById(R.id.paid_dialog);
+
+                                double paid = Double.parseDouble(paid_dialog.getText().toString());
+                                double amount = debt.getAmount();
+
+                                if (paid <= amount){
+                                    Double remaining = amount - paid;
+                                    DecimalFormat formatter = new DecimalFormat("#,###,###.##");
+
+                                    debt.setAmount(remaining);
+                                    debt.setDetails(debt.getDetails() + "\n- $" + formatter.format(paid));
+
+                                    databaseReference.child("users")
+                                            .child(firebaseUser.getUid())
+                                            .child("debts")
+                                            .child(id_debt)
+                                            .setValue(debt);
+
+                                    Toast.makeText(DebtEditorActivity.this, "Remaining: " + remaining, Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(DebtEditorActivity.this, "Error: Paid more than Amount", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                        })
+                        .show();
+
             }
         });
     }

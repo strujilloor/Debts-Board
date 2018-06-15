@@ -199,7 +199,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void createDebt(String name, Double amount, boolean type){
-        Debt debt = new Debt(databaseReference.push().getKey(), name, amount, type, "");
+        DecimalFormat formatter = new DecimalFormat("#,###,###.##");
+        Debt debt = new Debt(databaseReference.push().getKey(), name, amount, type, "Reason:\nTotal: " + formatter.format(amount));
         databaseReference.child(DEBT_NODE)
                 .child(firebaseUser.getUid())
                 .child("debts")

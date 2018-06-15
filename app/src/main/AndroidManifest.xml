@@ -28,7 +28,9 @@
 
         <activity
             android:name=".view.DebtEditorActivity"
-            android:parentActivityName=".view.MainActivity">
+            android:parentActivityName=".view.MainActivity"
+            android:configChanges="screenSize|orientation"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />
